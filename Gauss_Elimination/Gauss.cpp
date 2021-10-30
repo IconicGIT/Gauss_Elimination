@@ -119,8 +119,29 @@ int main()
 
 	int pivot = 0;
 	int subpivot = 0;
-
+	i = 0;
+	j = 0;
 	
+	//j counts the ROWS that have zeros
+	for (j = i + 1; j < N; j++)
+	{
+		pivot = Matrix[i][i];
+		
+		cout << " ";
+		//i counts the COLUMNS that have zeros
+		for (i = 0; i < N - 1; i++)
+		{
+			subpivot = Matrix[j + i][i];
+			cout << " ";
+			//k counts the whole ROW that needs to be multiplied
+			for (k = i; k < N + 1; k++)
+			{
+				
+			}
+
+		}
+		
+	}
 
 
 	//for (j = 0; j < N - 1; j++)
