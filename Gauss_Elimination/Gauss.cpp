@@ -4,6 +4,12 @@
 #include<stdlib.h>
 #include<time.h>
 
+#include "SDL/include/SDL.h"
+#pragma comment( lib, "SDL/libx86/SDL2.lib" )
+#pragma comment( lib, "SDL/libx86/SDL2main.lib" )
+
+
+
 using namespace std;
 
 
@@ -55,6 +61,9 @@ void ForwardThreeLoop(int matSize, bool autoFill)
 	}
 
 	bool ret = false;
+
+	float executionTime = 0;
+	
 
 	while (!ret)
 	{
@@ -128,6 +137,7 @@ void ForwardThreeLoop(int matSize, bool autoFill)
 			//	}
 
 
+		double Init = SDL_GetTicks();
 
 		// 3 LOOPS TRIANGULATION
 
@@ -149,6 +159,10 @@ void ForwardThreeLoop(int matSize, bool autoFill)
 			}
 		}
 
+		double End = SDL_GetTicks();
+
+		executionTime = (End - Init) * 1000.0f;
+		
 
 		//ORIGINAL NOT COPY -> not the code we need.
 		//for (j = 0; j < N - 1; j++)
@@ -219,11 +233,15 @@ void ForwardThreeLoop(int matSize, bool autoFill)
 	for (i = 0; i < matSize; i++)
 		cout << "x[" << setw(3) << i + 1 << "]=" << setw(7) << setprecision(4) << x[i] << endl;
 
+	cout << "Triangulation Caltulation time: " << executionTime << endl;
+
 	//delete heap data
 	for (size_t a = 0; a < matSize; a++)
 	{
 		delete[] Mat[a];
 	}
+
+	
 }
 
 void ThreeLoops_5x5()
@@ -231,9 +249,10 @@ void ThreeLoops_5x5()
 
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-	srand(time(NULL));
+	//srand(time(NULL));
+	SDL_Init(0);
 	
 	int matSize;
 	int autoFill = false;
@@ -245,7 +264,12 @@ int main()
 	cin >> autoFill;
 	cout << endl;
 
+	double init = SDL_GetTicks();
 	ForwardThreeLoop(matSize, autoFill);
+	double end = SDL_GetTicks();
+
+	float total = (end - init) * 1000.0f;
+	cout << total << endl;
 
 	
 
