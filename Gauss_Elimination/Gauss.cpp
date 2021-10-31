@@ -1,75 +1,122 @@
 #include<iostream>
 #include<iomanip>
 #include<cmath>
-#define N 3
+
 using namespace std;
 
+
+<<<<<<< HEAD
+// Cambiar lo de N
+
+float* ForwardThreeLoops(int i, int j, int k, int pivot, int subpivot, float Matrix[N][N + 1]);
+//float* ForwardOneLoop(int n, );
+
+=======
+>>>>>>> 079d01858c138b58007d3f4ff5a63f5a6afec22f
 int main()
 {
-	// Augmented Matrix = Matrix + results
-	float Matrix[N][N + 1], x[N] = { 0 };
-	
-	//recurrent counting variables
+
+	int matSize = 0;
 	int i = 0;
 	int j = 0;
 	int k = 0;
 
-	
+	cout << "Enter Dimension of the matrix [n x n]\n";
+	cin >> matSize;
+
+	// Augmented Matrix = Matrix + results
+	float* x = new float[matSize * sizeof(float)];
+
+	float** Mat = new float*[matSize * sizeof(float)];
+
+	for (int a = 0; a < matSize; a++)
+	{
+		*(Mat + a) = new float[(matSize + 1) * sizeof(float)];
+	}
+
+
+	for (int a = 0; a < matSize; a++)
+	{
+		for (int b = 0; b < matSize + 1; b++)
+		{
+			Mat[a][b] = 0;
+		}
+
+	}
+
+	//recurrent counting variables
+
+
+
 
 	//User inputs the matrix elements by rows
-
-	cout << "Enter Elements of " << N << " Rows & " << N + 1 << " Columns\n";
+	cout << "Enter Elements of " << matSize << " Rows & " << matSize + 1 << " Columns\n";
 	cout << fixed;
 
-	for (i = 0; i < N; i++)
+	for (i = 0; i < matSize; i++)
 	{
 		cout << "\tEnter Row  " << i + 1 << " & Press Enter\n";
-		for (j = 0; j < N + 1; j++)
-			cin >> Matrix[i][j];
+		for (j = 0; j < matSize + 1; j++)
+			cin >> Mat[i][j];
 	}
 
 	//Upper triangulation loops
 
 	int pivot = 0;
 	int subpivot = 0;
-	
+
 	i = 0;
 	j = 0;
 	k = 0;
+<<<<<<< HEAD
 	
+
+
+
 	
+=======
+
+
+>>>>>>> 079d01858c138b58007d3f4ff5a63f5a6afec22f
 	// 3 LOOPS TRIANGULATION
 
-	//i counts the COLUMNS that have zeros
-	for (i = 0; i < N - 1; i++)
+	//i counts the COLUMNS that must have zeros
+	for (i = 0; i < matSize - 1; i++)
 	{
-		pivot = Matrix[i][i];
-		cout << " ";
-		//j counts the ROWS that have zeros
-		for (j = i + 1; j < N; j++)
+		pivot = Mat[i][i];
+
+		//j counts the ROWS that must have zeros
+		for (j = i + 1; j < matSize; j++)
 		{
-			subpivot = Matrix[j][i];
-			cout << " ";
+			subpivot = Mat[j][i];
+
 			//k counts the whole ROW that needs to be multiplied
-			for (k = i; k < N + 1; k++)
+			for (k = i; k < matSize + 1; k++)
 			{
-				Matrix[j][k] = pivot * Matrix[j][k] - subpivot * Matrix[i][k];
+				Mat[j][k] = pivot * Mat[j][k] - subpivot * Mat[i][k];
 			}
 		}
+<<<<<<< HEAD
 		cout << " ";
+	}
+
+	//Matrix= ForwardThreeLoops(i,j,k,pivot,subpivot,&Matrix);
+
+	//Matrix= ForwardOneLoop(i,j,k,pivot,subpivot,&Matrix);
+
+	
+	//for (i=1; i < N - 1; i++)
+	//{
+	//	Matrix[i + 1:n] [i] = Matrix[i + 1:n][ i] / Matrix[i] [i];
+	//	Matrix[i + 1:n] [i + 1 :n] = Matrix[i + 1:n] [i + 1 :n] - Matrix[i + 1:n][ i] * Matrix[i] [i + 1:n];
+	//}
+=======
+
 	}
 
 
 
-
-
-
-
-
-
-
-	
-
+>>>>>>> 079d01858c138b58007d3f4ff5a63f5a6afec22f
 
 
 
@@ -86,14 +133,15 @@ int main()
 	//	}
 	//}
 
+
 	//print the Upper Triangular matrix
 
 	cout << "\n ---------------------------------\n";
-	cout << "\n Upper Triangular Matrix is:\n";
-	for (i = 0; i < N; i++)
+	cout << "\n Upper Triangular Mat is:\n";
+	for (i = 0; i < matSize; i++)
 	{
-		for (j = 0; j < N + 1; j++)
-			cout << setw(8) << setprecision(4) << Matrix[i][j];
+		for (j = 0; j < matSize + 1; j++)
+			cout << setw(8) << setprecision(4) << Mat[i][j];
 		cout << endl;
 	}
 
@@ -101,40 +149,85 @@ int main()
 
 	cout << "\n ---------------------------------\n";
 
-	//for (i = N - 1; i >= 0; i--)
-	//{
-	//	s = 0;
-	//	for (j = i + 1; j < N; j++)
-	//		s += Matrix[i][j] * x[j];
-	//	x[i] = (Matrix[i][N] - s) / Matrix[i][i];
-	//}
+	//right = accumulation of Matrix[i][j] * x[j]; (delivery 1 page 10)
+	float* right = new float[matSize * sizeof(float)];
 
-	int right[N] = { 0 };
-
-	for (i = N - 1; i >= 0; i--)
+	for (int a = 0; a < matSize; a++)
 	{
-		for (j = i + 1; j < N; j++)
-		{
-			right[i] += Matrix[i][j] * x[j];
-		}
-		x[i] = (Matrix[i][N] - right[i]) / Matrix[i][i];
+		right[a] = 0;
+	}
 
-		
+
+	for (i = matSize - 1; i >= 0; i--)
+	{
+		for (j = i + 1; j < matSize; j++)
+		{
+			right[i] += Mat[i][j] * x[j];
+		}
+		x[i] = (Mat[i][matSize] - right[i]) / Mat[i][i];
+
+
 	}
 
 	//print values of x,y,z
 
 	cout << "\n The Solution is:\n";
-	for (i = 0; i < N; i++)
+	for (i = 0; i < matSize; i++)
 		cout << "x[" << setw(3) << i + 1 << "]=" << setw(7) << setprecision(4) << x[i] << endl;
+
+	//delete heap data
+	for (size_t a = 0; a < matSize; a++)
+	{
+		delete[] Mat[a];
+	}
 
 
 	return 0;
-	//wikkihut.com
 }
+
+
 
 // 1 Loop Algorithm
 
 //for i = 1 to n - 1
 //A(i + 1:n, i) = A(i + 1:n, i) / A(i, i)
 //A(i + 1:n, i + 1 : n) = A(i + 1:n, i + 1 : n) - A(i + 1:n, i) * A(i, i + 1:n)
+
+
+
+
+//float* ForwardThreeLoops(int i, int j, int k, int pivot, int subpivot, float* Matrix)
+//{
+//	for (i = 0; i < N - 1; i++)
+//	{
+//		pivot = *Matrix[i][i];
+//		cout << " ";
+//		//j counts the ROWS that have zeros
+//		for (j = i + 1; j < N; j++)
+//		{
+//			subpivot = Matrix[j][i];
+//			cout << " ";
+//			//k counts the whole ROW that needs to be multiplied
+//			for (k = i; k < N + 1; k++)
+//			{
+//				Matrix[j][k] = pivot * Matrix[j][k] - subpivot * Matrix[i][k];
+//			}
+//		}
+//		cout << " ";
+//	}
+//
+//	return Matrix;
+//}
+//
+//float ForwardTwoLoops();
+
+//float* ForwardOneLoop(int n,float* Matrix)
+//{
+//	for (int i = 1; i < n - 1; i++)
+//	{
+//		Matrix(i + 1:n, i) = A(i + 1:n, i) / A(i, i);
+//		A(i + 1:n, i + 1 : n) = A(i + 1:n, i + 1 : n) - A(i + 1:n, i) * A(i, i + 1:n);
+//	}
+//   
+//	return Matrix;
+//}
