@@ -118,32 +118,100 @@ int main()
 	//make above matrix upper triangular Matrix
 
 	int pivot = 0;
+	int n_pivot = 0;
+
 	int subpivot = 0;
+	int n_subpivot = 0;
+	
 	i = 0;
 	j = 0;
+	k = 0;
 	
 	//j counts the ROWS that have zeros
-	for (j = i + 1; j < N; j++)
+	//for (j = i + 1; j < N; j++)
+	//{
+	//	pivot = Matrix[i][i];
+	//	
+	//
+	//	temp = i;
+	//	cout << " ";
+	//	//i counts the COLUMNS that have zeros
+	//	for (i = 0; i < N - 1; i++)
+	//	{
+	//		//if (j > 0)
+	//		//{
+	//		//	subpivot = Matrix[j][j];
+	//		//	cout << " ";
+	//		//}
+	//		//else {
+	//		//	subpivot = pivot;
+	//		//	cout << " ";
+	//		//}
+	//
+	//		subpivot = Matrix[i + 1][i];
+	//		cout << " ";
+	//		//k counts the whole ROW that needs to be multiplied
+	//		for (k = 0; k < N + 1; k++)
+	//		{
+	//			
+	//		}
+	//
+	//	}
+	//	i = temp + 1;
+	//	cout << " ";
+	//}
+
+
+	//i counts the COLUMNS that have zeros
+	for (i = 0; i < N - 1; i++)
 	{
 		pivot = Matrix[i][i];
-		
 		cout << " ";
-		//i counts the COLUMNS that have zeros
-		for (i = 0; i < N - 1; i++)
+		//j counts the ROWS that have zeros
+		for (j = i + 1; j < N; j++)
 		{
-			subpivot = Matrix[j + i][i];
+			subpivot = Matrix[j][i];
 			cout << " ";
 			//k counts the whole ROW that needs to be multiplied
 			for (k = i; k < N + 1; k++)
 			{
-				
+				Matrix[j][k] = pivot * Matrix[j][k] - subpivot * Matrix[i][k];
 			}
-
 		}
-		
+		cout << " ";
 	}
 
 
+
+
+
+
+
+
+
+
+	//for (i = 0; i < N - 1; i++)
+	//{
+	//	pivot = Matrix[i][j];
+	//	n_pivot = Matrix[i][i];
+	//	temp = j;
+	//	for (j = i + 1; j < N; j++)
+	//	{
+	//		subpivot = Matrix[i][j];
+	//		n_subpivot = Matrix[j][i];
+	//
+	//		//Matrix[j][i] = subpivot - n_pivot * subpivot / pivot;
+	//		cout << "";
+	//	}
+	//
+	//	j = temp + 1;
+	//}
+
+
+
+
+
+	//ORIGINAL NOT COPY
 	//for (j = 0; j < N - 1; j++)
 	//{
 	//	for (i = j + 1; i < N; i++)
