@@ -65,6 +65,14 @@ int main()
 	j = 0;
 	k = 0;
 
+	// 1 LOOP TRIANGULATION TRYAL
+
+	//for (int i = 1; i < N - 1; i++)
+		//	{
+		//		Matrix(i + 1:N, i) = Matrix(i + 1:N, i) / Matrix(i, i);
+		//		Matrix(i + 1:N, i + 1 : N) = Matrix(i + 1:N, i + 1 : N) - Matrix(i + 1:N, i) * Matrix(i, i + 1:N);
+		//	}
+
 	// 3 LOOPS TRIANGULATION
 
 	//i counts the COLUMNS that must have zeros
@@ -191,12 +199,6 @@ int main()
 
 //float* ForwardOneLoop(int n,float* Matrix)
 //{
-//	for (int i = 1; i < n - 1; i++)
-//	{
-//		Matrix(i + 1:n, i) = A(i + 1:n, i) / A(i, i);
-//		A(i + 1:n, i + 1 : n) = A(i + 1:n, i + 1 : n) - A(i + 1:n, i) * A(i, i + 1:n);
-//	}
-//   
-//	return Matrix;
+
 //}
 
