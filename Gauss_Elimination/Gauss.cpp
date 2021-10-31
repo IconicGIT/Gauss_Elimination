@@ -61,6 +61,13 @@ int main()
 	j = 0;
 	k = 0;
 
+	// 1 LOOP TRIANGULATION TRYAL
+
+	//for (int i = 1; i < N - 1; i++)
+		//	{
+		//		Matrix(i + 1:N, i) = Matrix(i + 1:N, i) / Matrix(i, i);
+		//		Matrix(i + 1:N, i + 1 : N) = Matrix(i + 1:N, i + 1 : N) - Matrix(i + 1:N, i) * Matrix(i, i + 1:N);
+		//	}
 
 	// 3 LOOPS TRIANGULATION
 
