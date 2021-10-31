@@ -1,18 +1,14 @@
 #include<iostream>
 #include<iomanip>
 #include<cmath>
-
+#define N 3
 using namespace std;
 
 
-<<<<<<< HEAD
 // Cambiar lo de N
 
 float* ForwardThreeLoops(int i, int j, int k, int pivot, int subpivot, float Matrix[N][N + 1]);
 //float* ForwardOneLoop(int n, );
-
-=======
->>>>>>> 079d01858c138b58007d3f4ff5a63f5a6afec22f
 int main()
 {
 
@@ -27,7 +23,7 @@ int main()
 	// Augmented Matrix = Matrix + results
 	float* x = new float[matSize * sizeof(float)];
 
-	float** Mat = new float*[matSize * sizeof(float)];
+	float** Mat = new float* [matSize * sizeof(float)];
 
 	for (int a = 0; a < matSize; a++)
 	{
@@ -68,16 +64,7 @@ int main()
 	i = 0;
 	j = 0;
 	k = 0;
-<<<<<<< HEAD
-	
 
-
-
-	
-=======
-
-
->>>>>>> 079d01858c138b58007d3f4ff5a63f5a6afec22f
 	// 3 LOOPS TRIANGULATION
 
 	//i counts the COLUMNS that must have zeros
@@ -96,93 +83,74 @@ int main()
 				Mat[j][k] = pivot * Mat[j][k] - subpivot * Mat[i][k];
 			}
 		}
-<<<<<<< HEAD
-		cout << " ";
-	}
-
-	//Matrix= ForwardThreeLoops(i,j,k,pivot,subpivot,&Matrix);
-
-	//Matrix= ForwardOneLoop(i,j,k,pivot,subpivot,&Matrix);
-
-	
-	//for (i=1; i < N - 1; i++)
-	//{
-	//	Matrix[i + 1:n] [i] = Matrix[i + 1:n][ i] / Matrix[i] [i];
-	//	Matrix[i + 1:n] [i + 1 :n] = Matrix[i + 1:n] [i + 1 :n] - Matrix[i + 1:n][ i] * Matrix[i] [i + 1:n];
-	//}
-=======
-
-	}
-
-
-
->>>>>>> 079d01858c138b58007d3f4ff5a63f5a6afec22f
 
 
 
 
-	//ORIGINAL NOT COPY -> not the code we need.
-	//for (j = 0; j < N - 1; j++)
-	//{
-	//	for (i = j + 1; i < N; i++)
-	//	{
-	//		temp = Matrix[i][j] / Matrix[j][j];
-	//
-	//		for (k = 0; k < N + 1; k++)
-	//			Matrix[i][k] -= Matrix[j][k] * temp;
-	//	}
-	//}
+
+		//ORIGINAL NOT COPY -> not the code we need.
+		//for (j = 0; j < N - 1; j++)
+		//{
+		//	for (i = j + 1; i < N; i++)
+		//	{
+		//		temp = Matrix[i][j] / Matrix[j][j];
+		//
+		//		for (k = 0; k < N + 1; k++)
+		//			Matrix[i][k] -= Matrix[j][k] * temp;
+		//	}
+		//}
 
 
-	//print the Upper Triangular matrix
+		//print the Upper Triangular matrix
 
-	cout << "\n ---------------------------------\n";
-	cout << "\n Upper Triangular Mat is:\n";
-	for (i = 0; i < matSize; i++)
-	{
-		for (j = 0; j < matSize + 1; j++)
-			cout << setw(8) << setprecision(4) << Mat[i][j];
-		cout << endl;
-	}
-
-	//find values of x,y,z using back substitution
-
-	cout << "\n ---------------------------------\n";
-
-	//right = accumulation of Matrix[i][j] * x[j]; (delivery 1 page 10)
-	float* right = new float[matSize * sizeof(float)];
-
-	for (int a = 0; a < matSize; a++)
-	{
-		right[a] = 0;
-	}
-
-
-	for (i = matSize - 1; i >= 0; i--)
-	{
-		for (j = i + 1; j < matSize; j++)
+		cout << "\n ---------------------------------\n";
+		cout << "\n Upper Triangular Mat is:\n";
+		for (i = 0; i < matSize; i++)
 		{
-			right[i] += Mat[i][j] * x[j];
+			for (j = 0; j < matSize + 1; j++)
+				cout << setw(8) << setprecision(4) << Mat[i][j];
+			cout << endl;
 		}
-		x[i] = (Mat[i][matSize] - right[i]) / Mat[i][i];
+
+		//find values of x,y,z using back substitution
+
+		cout << "\n ---------------------------------\n";
+
+		//right = accumulation of Matrix[i][j] * x[j]; (delivery 1 page 10)
+		float* right = new float[matSize * sizeof(float)];
+
+		for (int a = 0; a < matSize; a++)
+		{
+			right[a] = 0;
+		}
 
 
+		for (i = matSize - 1; i >= 0; i--)
+		{
+			for (j = i + 1; j < matSize; j++)
+			{
+				right[i] += Mat[i][j] * x[j];
+			}
+			x[i] = (Mat[i][matSize] - right[i]) / Mat[i][i];
+
+
+		}
+
+		//print values of x,y,z
+
+		cout << "\n The Solution is:\n";
+		for (i = 0; i < matSize; i++)
+			cout << "x[" << setw(3) << i + 1 << "]=" << setw(7) << setprecision(4) << x[i] << endl;
+
+		//delete heap data
+		for (size_t a = 0; a < matSize; a++)
+		{
+			delete[] Mat[a];
+		}
+
+
+		return 0;
 	}
-
-	//print values of x,y,z
-
-	cout << "\n The Solution is:\n";
-	for (i = 0; i < matSize; i++)
-		cout << "x[" << setw(3) << i + 1 << "]=" << setw(7) << setprecision(4) << x[i] << endl;
-
-	//delete heap data
-	for (size_t a = 0; a < matSize; a++)
-	{
-		delete[] Mat[a];
-	}
-
-
-	return 0;
 }
 
 
@@ -231,3 +199,4 @@ int main()
 //   
 //	return Matrix;
 //}
+
