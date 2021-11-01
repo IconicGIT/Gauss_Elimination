@@ -334,6 +334,9 @@ void ForwardTwoLoops(const int matSize, bool autoFill)
 				cout << setw(8) << setprecision(4) << Mat[i][j];
 			cout << endl;
 		}
+	}
+
+}
 
 int main()
 {
@@ -350,9 +353,9 @@ int main()
 	cin >> autoFill;
 	cout << endl;
 
-	ForwardThreeLoop(matSize, autoFill);
+	ForwardThreeLoops(matSize, autoFill);
 
-	
+	//ForwardTwoLoops
 
 
 	return 0;
