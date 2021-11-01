@@ -4,6 +4,12 @@
 #include<stdlib.h>
 #include<time.h>
 
+#include "SDL/include/SDL.h"
+#pragma comment( lib, "SDL/libx86/SDL2.lib" )
+#pragma comment( lib, "SDL/libx86/SDL2main.lib" )
+
+
+
 using namespace std;
 
 
@@ -55,6 +61,9 @@ void ForwardThreeLoops(int matSize, bool autoFill)
 	}
 
 	bool ret = false;
+
+	float executionTime = 0;
+	
 
 	while (!ret)
 	{
@@ -128,6 +137,7 @@ void ForwardThreeLoops(int matSize, bool autoFill)
 			//	}
 
 
+		double Init = SDL_GetTicks();
 
 		// 3 LOOPS TRIANGULATION
 
@@ -149,6 +159,10 @@ void ForwardThreeLoops(int matSize, bool autoFill)
 			}
 		}
 
+		double End = SDL_GetTicks();
+
+		executionTime = (End - Init) * 1000.0f;
+		
 
 		//ORIGINAL NOT COPY -> not the code we need.
 		//for (j = 0; j < N - 1; j++)
@@ -219,11 +233,15 @@ void ForwardThreeLoops(int matSize, bool autoFill)
 	for (i = 0; i < matSize; i++)
 		cout << "x[" << setw(3) << i + 1 << "]=" << setw(7) << setprecision(4) << x[i] << endl;
 
+	cout << "Triangulation Caltulation time: " << executionTime << endl;
+
 	//delete heap data
 	for (size_t a = 0; a < matSize; a++)
 	{
 		delete[] Mat[a];
 	}
+
+	
 }
 
 void ThreeLoops_5x5()
@@ -317,132 +335,10 @@ void ForwardTwoLoops(const int matSize, bool autoFill)
 			cout << endl;
 		}
 
-		//find values of x,y,z using back substitution
-
-
-
-		//Upper triangulation loops
-
-		int pivot = 0;
-		int subpivot = 0;
-
-		i = 0;
-		j = 0;
-		k = 0;
-
-		// 1 LOOP TRIANGULATION TRYAL
-
-		//for (int i = 1; i < matSize - 1; i++)
-		//		{
-		//			Mat[i + 1] [i] = Mat[i + 1] [i] / Mat[i] [i];
-		//			Mat[i + 1] [i + 1 ] = Mat[i + 1] [i + 1 ] - Mat[i + 1] [i] * Mat[i] [i + 1];
-		//		}
-
-
-		float li = 0;
-		int taco = matSize + 1;
-		//float b[taco];
-
-		for (int i = 0; i < matSize; i++)
-		{
-			//b[i] = Mat[i][matSize];
-		}
-
-		// A = Mat
-		// b = Vector de resultados, ultima columna de la matriz n*n+1
-
-		for (int k = 1; k < matSize ; k++)
-		{
-
-			for (int i = k + 1; i < matSize; i++)
-			{
-				li = Mat[i][k] / Mat[k][k];
-
-				Mat[i][matSize] = Mat[i][matSize] - li * Mat[k][matSize];
-				//b[i] = b[i] - li * b[k];
-			}
-
-		}
-
-		//ORIGINAL NOT COPY -> not the code we need.
-		//for (j = 0; j < N - 1; j++)
-		//{
-		//	for (i = j + 1; i < N; i++)
-		//	{
-		//		temp = Matrix[i][j] / Matrix[j][j];
-		//
-		//		for (k = 0; k < N + 1; k++)
-		//			Matrix[i][k] -= Matrix[j][k] * temp;
-		//	}
-		//}
-
-
-		//print the Upper Triangular matrix
-
-		cout << "\n ---------------------------------\n";
-		cout << "\n Upper Triangular Mat is:\n";
-		for (i = 0; i < matSize; i++)
-		{
-			for (j = 0; j < matSize + 1; j++)
-				cout << setw(8) << setprecision(4) << Mat[i][j];
-			cout << endl;
-		}
-
-		//find values of x,y,z using back substitution
-
-		cout << "\n ---------------------------------\n";
-
-		//right = accumulation of Matrix[i][j] * x[j]; (delivery 1 page 10)
-		float* right = new float[matSize * sizeof(float)];
-
-		for (int a = 0; a < matSize; a++)
-		{
-			right[a] = 0;
-		}
-
-
-		for (i = matSize - 1; i >= 0; i--)
-		{
-			for (j = i + 1; j < matSize; j++)
-			{
-				right[i] += Mat[i][j] * x[j];
-			}
-
-			if (Mat[i][i] != 0)
-			{
-
-				x[i] = (Mat[i][matSize] - right[i]) / Mat[i][i];
-				ret = true;
-			}
-			else
-			{
-				//matrix no valid for processing
-				cout << "Error: Trying to divide by 0." << endl;
-				ret = false;
-				break;
-			}
-
-
-		}
-	}
-
-
-	//print values of x,y,z
-
-	cout << "\n The Solution is:\n";
-	for (i = 0; i < matSize; i++)
-		cout << "x[" << setw(3) << i + 1 << "]=" << setw(7) << setprecision(4) << x[i] << endl;
-
-	//delete heap data
-	for (size_t a = 0; a < matSize; a++)
-	{
-		delete[] Mat[a];
-	}
-}
-
 int main()
 {
-	srand(time(NULL));
+	//srand(time(NULL));
+	SDL_Init(0);
 	
 	int matSize;
 	int autoFill = false;
@@ -454,9 +350,7 @@ int main()
 	cin >> autoFill;
 	cout << endl;
 
-	ForwardThreeLoops(matSize, autoFill);
-
-	//ForwardTwoLoops(matSize, autoFill);
+	ForwardThreeLoop(matSize, autoFill);
 
 	
 
