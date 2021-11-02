@@ -9,9 +9,4 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Gauss.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-  </ItemGroup>
 </Project>
