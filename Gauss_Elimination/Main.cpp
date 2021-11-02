@@ -3,14 +3,8 @@
 #include<cmath>
 #include<stdlib.h>
 #include<time.h>
-
-#include "SDL/include/SDL.h"
-
-
-#pragma comment( lib, "SDL/libx86/SDL2.lib" )
-#pragma comment( lib, "SDL/libx86/SDL2main.lib" )
-
-
+#include <chrono>
+typedef std::chrono::high_resolution_clock Clock;
 
 using namespace std;
 
@@ -64,7 +58,7 @@ void ForwardThreeLoops(int matSize, bool autoFill)
 
 	bool ret = false;
 
-	float executionTime = 0;
+	double executionTime;
 	
 
 	while (!ret)
@@ -139,7 +133,7 @@ void ForwardThreeLoops(int matSize, bool autoFill)
 			//	}
 
 
-		//double Init = SDL_GetTicks();
+		auto Init = Clock::now();
 
 		// 3 LOOPS TRIANGULATION
 
@@ -161,11 +155,11 @@ void ForwardThreeLoops(int matSize, bool autoFill)
 			}
 		}
 
-		//double End = SDL_GetTicks();
+		auto End = Clock::now();
 
 		//executionTime = (End - Init) * 1000.0f;
 		
-
+		executionTime = std::chrono::duration_cast<std::chrono::nanoseconds>(End - Init).count();
 		//ORIGINAL NOT COPY -> not the code we need.
 		//for (j = 0; j < N - 1; j++)
 		//{
@@ -192,6 +186,7 @@ void ForwardThreeLoops(int matSize, bool autoFill)
 
 		//find values of x,y,z using back substitution
 
+		cout << "\n ---------------------------------\n";
 		cout << "\n ---------------------------------\n";
 
 		//right = accumulation of Matrix[i][j] * x[j]; (delivery 1 page 10)
@@ -235,7 +230,7 @@ void ForwardThreeLoops(int matSize, bool autoFill)
 	for (i = 0; i < matSize; i++)
 		cout << "x[" << setw(3) << i + 1 << "]=" << setw(7) << setprecision(4) << x[i] << endl;
 
-	cout << "Triangulation Caltulation time: " << executionTime << endl;
+	cout << "Triangulation Caltulation time: " << executionTime <<" nanoseconds." << endl;
 
 	//delete heap data
 	for (size_t a = 0; a < matSize; a++)
@@ -483,7 +478,7 @@ void ForwardTwoLoops(const int matSize, bool autoFill)
 int main(int argc, char* argv[])
 {
 	//srand(time(NULL));
-	SDL_Init(0);
+
 	
 	int matSize;
 	int autoFill = false;
@@ -495,9 +490,19 @@ int main(int argc, char* argv[])
 	cin >> autoFill;
 	cout << endl;
 
-	//ForwardThreeLoops(matSize, autoFill);
 
-	ForwardTwoLoops(matSize, autoFill);
+	ForwardThreeLoops(matSize, autoFill);
+
+
+	//ForwardTwoLoops(matSize, autoFill);
+
+
+
+
+
+
+	//ForwardTwoLoops
+
 
 
 	return 0;
