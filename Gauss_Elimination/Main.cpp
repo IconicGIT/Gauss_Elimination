@@ -32,17 +32,17 @@ void ForwardThreeLoops(int matSize, bool autoFill)
 
 	// Augmented Matrix = Matrix + results
 	//initialize matrix of n size
-	float* x = new float[matSize * sizeof(float)];
+	long* x = new long[matSize * sizeof(long)];
 	for (int a = 0; a < matSize; a++)
 	{
 		x[a] = 0;
 	}
 		
-	float** Mat = new float* [matSize * sizeof(float)];
+	long** Mat = new long* [matSize * sizeof(long)];
 
 	for (int a = 0; a < matSize; a++)
 	{
-		*(Mat + a) = new float[(matSize + 1) * sizeof(float)];
+		*(Mat + a) = new long[(matSize + 1) * sizeof(long)];
 	}
 
 	float range = 0;
@@ -155,7 +155,7 @@ void ForwardThreeLoops(int matSize, bool autoFill)
 		for (i = 0; i < matSize; i++)
 		{
 			for (j = 0; j < matSize + 1; j++)
-				cout << setw(3) << setprecision(4) << Mat[i][j];
+				cout << setw(10) << setprecision(4) << Mat[i][j];
 			cout << endl;
 		}
 
@@ -191,6 +191,7 @@ void ForwardThreeLoops(int matSize, bool autoFill)
 				//matrix no valid for processing
 				cout << "Error: Trying to divide by 0." << endl;
 				ret = false;
+				delete right;
 				break;
 			}
 
@@ -225,30 +226,30 @@ int main(int argc, char* argv[])
 
 	int matSize;
 	int autoFill = false;
-	cout << "\tEnter Dimension of the matrix [n x n]\n";
-	cin >> matSize;
-	cout << endl;
+	bool repeat = true;
+	while (repeat)
+	{
+		cout << "\tEnter Dimension of the matrix [n x n]\n";
+		cin >> matSize;
+		cout << endl;
 
-	cout << "\tDo yo want to fill the matrix automatically? [1 = yes, 0 = no]\n";
-	cin >> autoFill;
-	cout << endl;
+		cout << "\tDo yo want to fill the matrix automatically? [1 = yes, 0 = no]\n";
+		cin >> autoFill;
+		cout << endl;
 
-	ForwardThreeLoops(matSize, autoFill);
-	cout << "End of equation 1." << endl;
-	cout << endl;
-	cout << endl;
+		ForwardThreeLoops(matSize, autoFill);
+		cout << "End." << endl;
+		cout << endl;
+		cout << endl;
 
+		cout << "Do yo want to start again? [1] = yes, [0] = no." << endl;
+		cout << endl;
 
-	cout << "\tEnter Dimension of the matrix [n x n]\n";
-	cin >> matSize;
-	cout << endl;
+		cin >> repeat;
+		cout << endl;
+		cout << endl;
+	}
 
-	cout << "\tDo yo want to fill the matrix automatically? [1 = yes, 0 = no]\n";
-	cin >> autoFill;
-	cout << endl;
-
-	ForwardThreeLoops(matSize, autoFill);
-	cout << "End of equation 2." << endl;
 
 	return 0;
 }
