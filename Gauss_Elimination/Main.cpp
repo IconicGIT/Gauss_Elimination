@@ -145,6 +145,21 @@ void ForwardThreeLoops(int matSize, bool autoFill)
 		//end time stamp
 		auto End = Clock::now();
 		
+		//PARTIAL PIVOTING
+		/*
+				//for (j = 0; j < N - 1; j++)
+		//{
+		//	for (i = j + 1; i < N; i++)
+		//	{
+		//		temp = Matrix[i][j] / Matrix[j][j];
+		//
+		//		for (k = 0; k < N + 1; k++)
+		//			Matrix[i][k] -= Matrix[j][k] * temp;
+		//	}
+		//}
+		
+		*/
+
 		//total triangulation time
 		executionTime = std::chrono::duration_cast<std::chrono::nanoseconds>(End - Init).count();
 
